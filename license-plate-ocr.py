@@ -28,7 +28,7 @@ if __name__ == '__main__':
 		ocr_net  = dn.load_net(ocr_netcfg.encode('utf-8'), ocr_weights.encode('utf-8'), 0)
 		ocr_meta = dn.load_meta(ocr_dataset.encode('utf-8'))
 
-		imgs_paths = sorted(glob(output_dir,'/*lp.png'))
+		imgs_paths = sorted(glob(os.path.join(output_dir,'*lp.png')))
 
 		print ('Performing OCR...')
 
