@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
 		print ('Performing OCR...')
 
-		for i,img_path in enumerate(imgs_paths):
+		for img_path in enumerate(imgs_paths):
 
 			print( '\tScanning %s' % img_path)
 			start = datetime.datetime.now()
