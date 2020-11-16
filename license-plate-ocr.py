@@ -34,7 +34,7 @@ if __name__ == '__main__':
 
 		for img_path in enumerate(imgs_paths):
 
-			print( '\tScanning %s' % img_path)
+			print( '\tScanning ', img_path)
 			start = datetime.datetime.now()
 			bname = basename(splitext(img_path)[0])
 
