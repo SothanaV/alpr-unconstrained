@@ -2,8 +2,9 @@ import sys
 import cv2
 import numpy as np
 import traceback
-
+import os
 import darknet.python.darknet as dn
+
 
 from os.path 				import splitext, basename
 from glob					import glob
@@ -17,6 +18,9 @@ if __name__ == '__main__':
 	try:
 	
 		input_dir  = sys.argv[1]
+		
+		print(input_dir)
+		
 		output_dir = input_dir
 
 		ocr_threshold = .4
@@ -28,15 +32,18 @@ if __name__ == '__main__':
 		ocr_net  = dn.load_net(ocr_netcfg.encode('utf-8'), ocr_weights.encode('utf-8'), 0)
 		ocr_meta = dn.load_meta(ocr_dataset.encode('utf-8'))
 
-		imgs_paths = sorted(glob('%s/*lp.png' % output_dir))
+		imgs_paths = sorted(glob(os.path.join(output_dir,'*lp.png')))
+		
+		print(imgs_paths)
 
 		print ('Performing OCR...')
 
-		for i,img_path in enumerate(imgs_paths):
+		for img_path in enumerate(imgs_paths):
 
-			print( '\tScanning %s' % img_path)
+			print( '\tScanning ', img_path)
 			start = datetime.datetime.now()
-			bname = basename(splitext(img_path)[0])
+			split = splitext(img_path)
+			bname = basename(split[0])
 
 			R,(width,height) = detect(ocr_net, ocr_meta, img_path.encode('utf-8') ,thresh=ocr_threshold, nms=None)
 
